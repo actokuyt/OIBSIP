@@ -1,0 +1,180 @@
+*{
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #4d8ac8;
+    width: 100vw;
+}
+
+.container{
+    background: #eaf5fe;
+    border-radius: 1em;
+    width: 30%;
+    margin: 5em auto;
+    padding: 1em;
+}
+
+
+.screen{
+    background: #cbe4fc;
+    width: 95%;
+    height: 8em;
+    margin: 2em auto;
+    border-radius: 1em;
+    overflow-x: hidden;
+}
+
+.problemDisplay{
+    color: black;
+    display: block;
+    width: 100%;
+    text-align: start;
+    font-size: 1.5em;
+    padding: .5em;
+    overflow-x: hidden;
+}
+
+.resultDisplay{
+    overflow-x: hidden;
+    color: black;
+    display: block;
+    width: 100%;
+    text-align: end;
+    font-size: 3em;
+}
+
+.buttons{
+    width: 90%;
+    margin: .5em auto;
+}
+
+.buttons > ul {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
+    gap: .5em;
+    justify-content: center;
+}
+
+.buttons > ul > li > button{
+    background-color: #cbe4fc;
+    border-radius: .3em;
+    border: none;
+    width: 4em;
+    height: 4em;
+    font-size: 1em;
+}
+
+.clear {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 4;
+    grid-column-end: 6;
+}
+
+.symbol-button {
+    background-color: #a3cffa !important;
+}
+
+@media only screen and (max-width: 1100px) {
+    .container{
+        background: #eaf5fe;
+        border-radius: 1em;
+        width: 50%;
+        margin: 5em auto;
+        padding: 1em;
+    }
+  }
+
+@media only screen and (max-width: 600px) {
+    .container{
+        background: #eaf5fe;
+        border-radius: 1em;
+        width: 100%;
+        margin: 5em auto;
+        padding: 1em;
+    }
+  }
+
+
+
+
+/* .numberBtns {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 1.5em;
+
+}
+
+.numberBtns > button{
+    background-color: #cbe4fc;
+    border-radius: .3em;
+    border: none;
+    width: 1.8em;
+    height: 1.8em;
+    font-size: 3em;
+}
+
+.operatorBtns {
+    grid-row-start: 1;
+    grid-row-end: 5;
+    grid-column-start: 4;
+    grid-column-end: 5;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+    gap: 1.5em;
+}
+
+.operatorBtns > button{
+    background-color: #a3cffa;
+    border-radius: .3em;
+    border: none;
+    width: 1.8em;
+    height: 1.8em;
+    font-size: 3em;
+}
+
+.decimalZeroEquals{
+    grid-row-start: 4;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1.5em;
+}
+
+.decimalZeroEquals > button {
+    background-color: #a3cffa;
+    border-radius: .3em;
+    border: none;
+    width: 1.8em;
+    height: 1.8em;
+    font-size: 3em;
+}
+
+.clearScreenBtn{
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 6;
+}
+
+.clearScreenBtn > button {
+    background-color: #4d8ac8;
+    border-radius: .3em;
+    border: none;
+    width: 94%;
+    height: 3em;
+    font-size: 1.5em;
+} */

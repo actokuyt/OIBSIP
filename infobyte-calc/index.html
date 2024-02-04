@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my Calculator app</title>
+    <link rel="stylesheet" href="./stylesheets/main.css" />
+  </head>
+  <body>
+    <div class="container">
+        <div class="screen">
+          <span class="problemDisplay" id="problemDisplay"></span>
+          <span class="resultDisplay" id="resultDisplay" ></span>
+        </div>
+        <div class="buttons">
+          <ul id="btnsContainer" >
+            <li><button id="(" class="symbol-button" >(</button></li>
+            <li><button id=")" class="symbol-button" >)</button></li>
+            <li><button id="%" class="symbol-button" >%</button></li>
+            <li><button id="square" class="symbol-button" >^2</button></li>
+            <li><button id="squareRoot" class="symbol-button" >sqrt</i></button></li>
+            <li><button id="7" >7</button></li>
+            <li><button id="8" >8</button></li>
+            <li><button id="9" >9</button></li>
+            <li><button id="*" class="symbol-button" >*</button></li>
+            <li><button id="/" class="symbol-button" >/</button></li>
+            <li><button id="4" >4</button></li>
+            <li><button id="5" >5</button></li>
+            <li><button id="6" >6</button></li>
+            <li><button id="+" class="symbol-button" >+</button></li>
+            <li><button id="-" class="symbol-button" >-</button></li>
+            <li><button id="1" >1</button></li>
+            <li><button id="2" >2</button></li>
+            <li><button id="3" >3</button></li>
+            <li><button id="=" class="symbol-button" >=</button></li>
+            <li><button id="del" class="symbol-button" >del</button></li>
+            <li><button id="." class="symbol-button" >.</button></li>
+            <li><button id="0" >0</button></li>
+            <li><button id="plusMinus" class="symbol-button" >(-</button></li>
+            <li class="clear"><button id="clear" style="background-color: #4d8ac8; width: 100%; " >clear</button></li>
+          </ul>
+
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@12.3.1/lib/browser/math.min.js"></script>
+    <script type="module" src="./scripts/main.js"></script>
+  </body>
+</html>
