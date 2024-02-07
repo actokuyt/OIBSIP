@@ -18,7 +18,8 @@
 }
 
 .title {
-  padding-bottom: 2em;
+  width: 100%;
+  padding-bottom: 4em;
   position: absolute;
   bottom: 0;
   background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
@@ -26,7 +27,7 @@
 
 .title > h1 {
   font-family: sans-serif;
-  font-size: 2.6em;
+  font-size: 7em;
   padding: 0.3em;
 }
 
@@ -34,7 +35,7 @@
   font-family: "caveat", sans-serif;
   width: 100;
   text-align: right;
-  font-size: 1.4em;
+  font-size: 5em;
   padding: 0.3em;
 }
 
