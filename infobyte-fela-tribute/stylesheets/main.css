@@ -198,13 +198,8 @@
   text-decoration: underline;
 }
 
-/* @media only screen and( min-width : 600px){
-  *{
-    font-size: 2em;
-  }
-} */
 
-@media only screen and (min-width: 1500px) {
+@media only screen and (min-width: 700px) {
   .title-wrapper{
     width: 50%;
     margin: 0 auto;
