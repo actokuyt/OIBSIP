@@ -113,8 +113,9 @@ body {
   display: flex;
 }
 
-.task-list-items > span {
+.task-list-items > div {
   width: 90%;
+  display: grid;
 }
 
 .task-list-items > button {

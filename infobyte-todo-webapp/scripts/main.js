@@ -4,6 +4,12 @@ var editTaskModal = new bootstrap.Modal(
 
 let idCounter = 0;
 
+function timeGenerator() {
+  return `${dayjs()}`;
+}
+
+console.log(timeGenerator());
+
 function idGenerator() {
   return `task_${Date.now()}_${idCounter++}`;
 }
@@ -13,27 +19,31 @@ let tasks = [
     id: "task_100",
     text: "Demo Task 1",
     isCompleted: false,
+    time: "Mon, 12 Feb 2024 06:31:02 GMT",
   },
   {
     id: "task_200",
     text: "Demo Task 2",
     isCompleted: false,
+    time: "Mon, 12 Feb 2024 06:31:02 GMT",
   },
   {
     id: "task_300",
     text: "Demo Task 3",
     isCompleted: false,
+    time: "Mon, 12 Feb 2024 06:31:02 GMT",
   },
   {
     id: "task_400",
     text: "Demo Task 4",
     isCompleted: true,
+    time: "Mon, 12 Feb 2024 06:31:02 GMT",
   },
 ];
 let parentId;
 
 // Function to update UI
-function updateUI(id, text, isCompleted) {
+function updateUI(id, text, isCompleted, time) {
   const pendingTasks = document.getElementById("pending-task-list");
   const completedTasks = document.getElementById("completed-task-list");
 
@@ -43,6 +53,13 @@ function updateUI(id, text, isCompleted) {
 
   const taskText = document.createElement("span");
   taskText.textContent = text;
+
+  const taskTime = document.createElement("span");
+  taskTime.textContent = time;
+
+  const textTimeContainer = document.createElement("div");
+  textTimeContainer.appendChild(taskText);
+  textTimeContainer.appendChild(taskTime);
 
   const completeButton = document.createElement("button");
   if (isCompleted == true) {
@@ -56,12 +73,12 @@ function updateUI(id, text, isCompleted) {
     tasks.forEach((task) => {
       if (task.id == parentId && task.isCompleted == false) {
         task.isCompleted = true;
-        updateUI(task.id, task.text, task.isCompleted);
+        updateUI(task.id, task.text, task.isCompleted, task.time);
         let completedTask = pendingTasks.querySelector(`#${task.id}`);
         pendingTasks.removeChild(completedTask);
       } else if (task.id == parentId && task.isCompleted == true) {
         task.isCompleted = false;
-        updateUI(task.id, task.text, task.isCompleted);
+        updateUI(task.id, task.text, task.isCompleted, task.time);
         let pendingTask = completedTasks.querySelector(`#${task.id}`);
         completedTasks.removeChild(pendingTask);
       }
@@ -91,11 +108,11 @@ function updateUI(id, text, isCompleted) {
     pendingTasks.innerHTML = "";
     completedTasks.innerHTML = "";
     tasks.forEach((task) => {
-      updateUI(task.id, task.text, task.isCompleted);
+      updateUI(task.id, task.text, task.isCompleted, task.time);
     });
   });
 
-  taskItem.appendChild(taskText);
+  taskItem.appendChild(textTimeContainer);
   taskItem.appendChild(completeButton);
   taskItem.appendChild(editButton);
   taskItem.appendChild(deleteButton);
@@ -123,7 +140,7 @@ editTaskSubmitBtn.addEventListener("click", (e) => {
   pendingTasks.innerHTML = "";
   completedTasks.innerHTML = "";
   tasks.forEach((task) => {
-    updateUI(task.id, task.text, task.isCompleted);
+    updateUI(task.id, task.text, task.isCompleted, task.time);
   });
   editedTask.value = "";
   editTaskModal.hide();
@@ -137,13 +154,14 @@ document.addEventListener("DOMContentLoaded", () => {
   completedTasks.innerHTML = "";
 
   tasks.forEach((task) => {
-    updateUI(task.id, task.text, task.isCompleted);
+    updateUI(task.id, task.text, task.isCompleted, task.time);
   });
 });
 
 // function to add task to tasks array
 function addTask() {
   let id = idGenerator();
+  let time = timeGenerator();
   let input = document.getElementById("input");
   let inputValue = input.value;
   if (inputValue.length < 1) {
@@ -154,10 +172,11 @@ function addTask() {
     id: id,
     text: inputValue,
     isCompleted: false,
+    time: time,
   };
 
   tasks.push(task);
-  updateUI(task.id, task.text, task.isCompleted);
+  updateUI(task.id, task.text, task.isCompleted, task.time);
   input.value = "";
 }
 
