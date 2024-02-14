@@ -80,7 +80,7 @@ body {
     background-color: #a3cffa !important;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-device-width: 1100px) {
     .container{
         background: #eaf5fe;
         border-radius: 1em;
@@ -90,7 +90,7 @@ body {
     }
   }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-device-width: 600px) {
     .container{
         background: #eaf5fe;
         border-radius: 1em;
