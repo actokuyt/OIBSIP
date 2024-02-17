@@ -20,6 +20,7 @@ loginSubmit.addEventListener("click", async (e) => {
     if (error.response.status == 404) {
       Swal.fire({
         text: "Username not Found",
+        footer: '<a href="/signup">signup?</a>',
       });
     }
     else if ( error.response.status == 403) {
