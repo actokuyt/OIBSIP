@@ -11,7 +11,6 @@ signupSubmit.addEventListener("click", async (e)=>{
 
   try {
       const response = await axios.post("https://infobyte-auth.onrender.com/signup", payload);
-      console.log(response);
       if (response.status == 200){
           signupUsername.value = "";
           signupPassword.value = "";
@@ -19,35 +18,13 @@ signupSubmit.addEventListener("click", async (e)=>{
             text: "Signup Successful!",
             footer: '<a href="/">Login?</a>',
           });
-      } else{
-          Swal.fire({
-              text: "Something Went Wrong",
-            });
       }
   } catch (error) {
-      console.error(error);
+      Swal.fire({
+        text: "User Name Already Exists",
+        footer: '<a href="/">Try Login?</a>',
+      });
   }
 
 });
 
-
-
-
-
-
-// import { registerUser } from "./users.js";
-
-// let signupUsername = document.getElementById("signupUsername");
-// let signupPassword = document.getElementById("signupPassword");
-// let signupSubmit = document.getElementById("signupSubmit");
-// signupSubmit.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   registerUser(signupUsername,signupPassword);
-
-//   signupUsername.value = "";
-//   signupPassword.value = "";
-//   Swal.fire({
-//     text: "Signup Successful!",
-//     footer: '<a href="./login.html">Login?</a>',
-//   });
-// });

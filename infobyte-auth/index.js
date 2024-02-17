@@ -22,20 +22,24 @@ app.get("/signup", (req, res) => {
 app.post("/signup", async (req, res) => {
   let { username, password } = req.body;
 
-  let hashedPassword = await bcrypt.hash(password, 2);
+  let isRegistered = users.find((user => user.username === username));
+  if (isRegistered) {
+    res.status(409).json({"message": "already registered"});
+  }else{
+    let hashedPassword = await bcrypt.hash(password, 10);
 
-  let user = {
-    username: username,
-    password: hashedPassword,
-  };
-
-  users.push(user);
-  console.log(users);
-  res.status(200).json({ message: "user successfully registered" });
+    let user = {
+      username: username,
+      password: hashedPassword,
+    };
+  
+    users.push(user);
+    console.log(users);
+    res.status(200).json({ message: "user successfully registered" });
+  }
 });
 
 app.post("/login", async (req, res) => {
-//   res.render("dashboard");
   let { username, password } = req.body;
   console.log(req.body);
 
@@ -48,7 +52,7 @@ app.post("/login", async (req, res) => {
   try {
     let isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      res.send("Wrong Password");
+      res.status(403).json({message: "bad credentials"});
     } else {
       res.render("dashboard");
     }

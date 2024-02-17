@@ -9,24 +9,23 @@ loginSubmit.addEventListener("click", async (e) => {
     password: loginPassword.value,
   };
 
-  console.log(payload)
-
   try {
     let response = await axios.post("https://infobyte-auth.onrender.com/login", payload);
-    console.log(response);
     if (response.status == 200) {
       loginUsername.value = "";
       loginPassword.value = "";
-      // Swal.fire({
-      //   text: "login Successful!",
-      // });
       document.body.innerHTML = response.data;
-    } else if(response.status == 404){
-      Swal.fire({
-        text: "Something Went Wrong",
-      });
     }
   } catch (error) {
-    console.error(error);
+    if (error.response.status == 404) {
+      Swal.fire({
+        text: "Wrong Username Entered",
+      });
+    }
+    else if ( error.response.status == 403) {
+      Swal.fire({
+        text: "Wrong Password Entered",
+      });
+    }
   }
 });
