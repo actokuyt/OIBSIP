@@ -19,7 +19,7 @@ loginSubmit.addEventListener("click", async (e) => {
   } catch (error) {
     if (error.response.status == 404) {
       Swal.fire({
-        text: "Wrong Username Entered",
+        text: "Username not Found",
       });
     }
     else if ( error.response.status == 403) {
