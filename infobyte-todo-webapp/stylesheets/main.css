@@ -41,7 +41,7 @@ body {
   font-size: 1em;
 }
 
-.form {
+/* .form {
   color: #999;
   display: flex;
   margin: 1em;
@@ -71,7 +71,39 @@ body {
   border: none;
   width: 10%;
   background-color: #fff;
+} */
+
+.taskForm{
+  width: 90%;
+  margin: 1em auto;
 }
+
+.taskForm > input{
+  padding: 0.2em;
+  margin: 0.3em;
+  width: 100%;
+  border: 1px solid #333;
+  border-radius: 3px;
+}
+
+.taskForm > textarea{
+  padding: 0.2em;
+  margin: 0.3em;
+  width: 100%;
+  border: 1px solid #333;
+  border-radius: 3px;
+}
+
+.taskForm > button{
+  background-color: #4c956c;
+  padding: 0.2em;
+  margin: 0.3em;
+  border-radius: 3px;
+  width: 3em;
+  height: 2em;
+}
+
+
 
 .nav-desktop {
   display: none !important;
@@ -79,6 +111,7 @@ body {
 
 .nav-mobile {
   width: 100%;
+  margin: 0.5em 0;
 }
 
 .nav-link {
@@ -101,7 +134,7 @@ body {
   width: 90%;
   margin: auto;
   list-style-type: none;
-  padding-top: 12em;
+  padding-top: 9em;
   padding-bottom: 3.5em;
 }
 
@@ -116,12 +149,28 @@ body {
 .task-list-items > div {
   width: 90%;
   display: grid;
+  cursor: pointer;
 }
 
 .task-list-items > button {
   margin: 0.3em;
   border: none;
   background: none;
+}
+
+.addTask{
+  position: fixed;
+  bottom: 5em;
+  right: 1em;
+}
+
+.addTaskBtn{
+  background-color: #4c956c;
+  width: 3em;
+  height: 3em;
+  border: none;
+  border-radius: 1em;
+  box-shadow: 2px 2px 3px #333;
 }
 
 .footer {

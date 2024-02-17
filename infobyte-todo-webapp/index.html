@@ -35,18 +35,6 @@
         </div>
       </header>
 
-      <form class="form">
-        <input
-          id="input"
-          type="text"
-          class="form-input"
-          placeholder="Todo Task"
-        />
-        <button id="submitBtn" type="submit" class="form-button">
-          <i class="bi bi-plus"></i>
-        </button>
-      </form>
-
       <nav class="nav nav-mobile">
         <div class="nav nav-mobile nav-tabs" id="nav-tab" role="tablist">
           <button
@@ -77,7 +65,7 @@
       </nav>
     </div>
 
-    <nav class="d-flex align-items-start nav-desktop ">
+    <nav class="d-flex align-items-start nav-desktop">
       <div
         class="nav nav-desktop-container flex-column nav-pills me-3"
         id="v-pills-tab"
@@ -132,7 +120,13 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <div class="addTask">
+      <button id="addTaskBtn" class="addTaskBtn">
+        <i class="bi bi-plus-lg"></i>
+      </button>
+    </div>
+
+    <!-- Modals -->
     <div id="editTaskModal" class="modal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -146,17 +140,61 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form class="form modal-form">
-              <input
-                id="editTaskInput"
-                type="text"
-                class="form-input"
-                placeholder="Task"
-              />
+            <form class="taskForm modal-form">
+              <input id="editTaskTitle" type="text" placeholder="Task Title" />
+              <textarea
+                name="editTaskDesc"
+                id="editTaskDesc"
+                cols="40"
+                rows="5"
+                placeholder="Task Description"
+              ></textarea>
               <button id="editTaskSubmitBtn" type="submit" class="form-button">
                 <i class="bi bi-check2-all"></i>
               </button>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="addTaskModal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Task</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form class="taskForm modal-form">
+              <input id="addTaskTitle" type="text" placeholder="Task Title" />
+              <textarea
+                name="addTaskDesc"
+                id="addTaskDesc"
+                cols="40"
+                rows="5"
+                placeholder="Task Description"
+              ></textarea>
+              <button id="addTaskSubmitBtn" type="submit" class="form-button">
+                <i class="bi bi-check2-all"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="viewTaskModal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h1 id="viewTaskTitle" ></h1>
+            <p id="viewTaskDesc" ></p>
           </div>
         </div>
       </div>

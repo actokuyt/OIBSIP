@@ -2,13 +2,20 @@ var editTaskModal = new bootstrap.Modal(
   document.getElementById("editTaskModal")
 );
 
+var addTaskModal = new bootstrap.Modal(document.getElementById("addTaskModal"));
+
+var viewTaskModal = new bootstrap.Modal(
+  document.getElementById("viewTaskModal")
+);
+
 let idCounter = 0;
+let parentId;
+let taskTitle = document.getElementById("editTaskTitle");
+let taskDesc = document.getElementById("editTaskDesc");
 
 function timeGenerator() {
   return `${dayjs()}`;
 }
-
-console.log(timeGenerator());
 
 function idGenerator() {
   return `task_${Date.now()}_${idCounter++}`;
@@ -17,33 +24,37 @@ function idGenerator() {
 let tasks = [
   {
     id: "task_100",
-    text: "Demo Task 1",
+    title: "Demo Task 1",
+    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis veniam nihil corporis reprehenderit non quos culpa, error beatae sed facilis quia sapiente, dolorum molestiae laborum laudantium libero unde minima officiis!",
     isCompleted: false,
     time: "Mon, 12 Feb 2024 06:31:02 GMT",
   },
   {
     id: "task_200",
-    text: "Demo Task 2",
+    title: "Demo Task 2",
+    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis veniam nihil corporis reprehenderit non quos culpa, error beatae sed facilis quia sapiente, dolorum molestiae laborum laudantium libero unde minima officiis!",
     isCompleted: false,
     time: "Mon, 12 Feb 2024 06:31:02 GMT",
   },
   {
     id: "task_300",
-    text: "Demo Task 3",
+    title: "Demo Task 3",
+    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis veniam nihil corporis reprehenderit non quos culpa, error beatae sed facilis quia sapiente, dolorum molestiae laborum laudantium libero unde minima officiis!",
     isCompleted: false,
     time: "Mon, 12 Feb 2024 06:31:02 GMT",
   },
   {
     id: "task_400",
-    text: "Demo Task 4",
+    title: "Demo Task 4",
+    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis veniam nihil corporis reprehenderit non quos culpa, error beatae sed facilis quia sapiente, dolorum molestiae laborum laudantium libero unde minima officiis!",
     isCompleted: true,
     time: "Mon, 12 Feb 2024 06:31:02 GMT",
   },
 ];
-let parentId;
 
 // Function to update UI
-function updateUI(id, text, isCompleted, time) {
+function updateUI(id, title, isCompleted, time) {
+  console.log(tasks);
   const pendingTasks = document.getElementById("pending-task-list");
   const completedTasks = document.getElementById("completed-task-list");
 
@@ -52,7 +63,7 @@ function updateUI(id, text, isCompleted, time) {
   taskItem.setAttribute("id", `${id}`);
 
   const taskText = document.createElement("span");
-  taskText.textContent = text;
+  taskText.textContent = title;
 
   const taskTime = document.createElement("span");
   taskTime.textContent = time;
@@ -60,6 +71,21 @@ function updateUI(id, text, isCompleted, time) {
   const textTimeContainer = document.createElement("div");
   textTimeContainer.appendChild(taskText);
   textTimeContainer.appendChild(taskTime);
+  textTimeContainer.addEventListener("click", (e) => {
+    parentId = e.target.parentNode.parentNode.id;
+    let viewTaskTitle = document.getElementById("viewTaskTitle");
+    let viewTaskDesc = document.getElementById("viewTaskDesc");
+    tasks.forEach((task)=>{
+      if(task.id == parentId){
+        console.log("task found")
+        console.log(viewTaskTitle)
+        console.log(viewTaskDesc)
+        viewTaskTitle.innerText = task.title;
+        viewTaskDesc.innerText = task.desc;
+      }
+    })
+    viewTaskModal.toggle();
+  });
 
   const completeButton = document.createElement("button");
   if (isCompleted == true) {
@@ -73,12 +99,12 @@ function updateUI(id, text, isCompleted, time) {
     tasks.forEach((task) => {
       if (task.id == parentId && task.isCompleted == false) {
         task.isCompleted = true;
-        updateUI(task.id, task.text, task.isCompleted, task.time);
+        updateUI(task.id, task.title, task.isCompleted, task.time);
         let completedTask = pendingTasks.querySelector(`#${task.id}`);
         pendingTasks.removeChild(completedTask);
       } else if (task.id == parentId && task.isCompleted == true) {
         task.isCompleted = false;
-        updateUI(task.id, task.text, task.isCompleted, task.time);
+        updateUI(task.id, task.title, task.isCompleted, task.time);
         let pendingTask = completedTasks.querySelector(`#${task.id}`);
         completedTasks.removeChild(pendingTask);
       }
@@ -89,6 +115,12 @@ function updateUI(id, text, isCompleted, time) {
   editButton.innerHTML = "<i class='bi bi-pencil-fill'></i>";
   editButton.addEventListener("click", (e) => {
     parentId = e.target.parentNode.parentNode.id;
+    tasks.forEach((task) => {
+      if (task.id == parentId) {
+        taskTitle.value = task.title;
+        taskDesc.value = task.desc;
+      }
+    });
     editTaskModal.toggle();
   });
 
@@ -108,7 +140,7 @@ function updateUI(id, text, isCompleted, time) {
     pendingTasks.innerHTML = "";
     completedTasks.innerHTML = "";
     tasks.forEach((task) => {
-      updateUI(task.id, task.text, task.isCompleted, task.time);
+      updateUI(task.id, task.title, task.isCompleted, task.time);
     });
   });
 
@@ -128,11 +160,10 @@ function updateUI(id, text, isCompleted, time) {
 const editTaskSubmitBtn = document.getElementById("editTaskSubmitBtn");
 editTaskSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  const editedTask = document.getElementById("editTaskInput");
-  const editedTaskValue = editedTask.value;
   tasks.forEach((task) => {
     if (task.id == parentId) {
-      task.text = editedTaskValue;
+      task.title = taskTitle.value;
+      task.desc = taskDesc.value;
     }
   });
   const pendingTasks = document.getElementById("pending-task-list");
@@ -140,9 +171,10 @@ editTaskSubmitBtn.addEventListener("click", (e) => {
   pendingTasks.innerHTML = "";
   completedTasks.innerHTML = "";
   tasks.forEach((task) => {
-    updateUI(task.id, task.text, task.isCompleted, task.time);
+    updateUI(task.id, task.title, task.isCompleted, task.time);
   });
-  editedTask.value = "";
+  taskTitle.value = "";
+  taskDesc.value = "";
   editTaskModal.hide();
 });
 
@@ -154,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
   completedTasks.innerHTML = "";
 
   tasks.forEach((task) => {
-    updateUI(task.id, task.text, task.isCompleted, task.time);
+    updateUI(task.id, task.title, task.isCompleted, task.time);
   });
 });
 
@@ -162,27 +194,32 @@ document.addEventListener("DOMContentLoaded", () => {
 function addTask() {
   let id = idGenerator();
   let time = timeGenerator();
-  let input = document.getElementById("input");
-  let inputValue = input.value;
-  if (inputValue.length < 1) {
-    return;
-  }
+  let taskTitle = document.getElementById("addTaskTitle");
+  let taskDesc = document.getElementById("addTaskDesc");
 
   const task = {
     id: id,
-    text: inputValue,
+    title: taskTitle.value,
+    desc: taskDesc.value,
     isCompleted: false,
     time: time,
   };
 
   tasks.push(task);
-  updateUI(task.id, task.text, task.isCompleted, task.time);
-  input.value = "";
+  updateUI(task.id, task.title, task.isCompleted, task.time);
+  taskTitle.value = "";
+  taskDesc.value = "";
+  addTaskModal.hide();
 }
 
 // add task button event handler
-const addTaskBtn = document.getElementById("submitBtn");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const addTaskSubmitBtn = document.getElementById("addTaskSubmitBtn");
 addTaskBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  addTaskModal.toggle();
+});
+addTaskSubmitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   addTask();
 });
