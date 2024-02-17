@@ -34,18 +34,15 @@ app.post("/signup", async (req, res) => {
     };
   
     users.push(user);
-    console.log(users);
     res.status(200).json({ message: "user successfully registered" });
   }
 });
 
 app.post("/login", async (req, res) => {
   let { username, password } = req.body;
-  console.log(req.body);
 
   let user = users.find((user) => user.username === username);
   if (!user) {
-    console.log("user not found");
     return res.status(404).json({ message: "user not found" });
   }
 
@@ -57,7 +54,6 @@ app.post("/login", async (req, res) => {
       res.render("dashboard");
     }
   } catch (error) {
-    console.error(error);
     return res.status(500).send("internal server error");
   }
 });
