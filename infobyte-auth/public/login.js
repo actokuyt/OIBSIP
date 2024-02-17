@@ -12,7 +12,7 @@ loginSubmit.addEventListener("click", async (e) => {
   console.log(payload)
 
   try {
-    let response = await axios.post("http://localhost:5000/login", payload);
+    let response = await axios.post("https://infobyte-auth.onrender.com/login", payload);
     console.log(response);
     if (response.status == 200) {
       loginUsername.value = "";

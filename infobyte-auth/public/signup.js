@@ -10,7 +10,7 @@ signupSubmit.addEventListener("click", async (e)=>{
   }
 
   try {
-      const response = await axios.post("http://localhost:5000/signup", payload);
+      const response = await axios.post("https://infobyte-auth.onrender.com/signup", payload);
       console.log(response);
       if (response.status == 200){
           signupUsername.value = "";
